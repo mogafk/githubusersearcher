@@ -22,7 +22,7 @@ longPolling.subscribe(function(chats) {
             chat.reply('В качестве сообщения должно быть одно слово-логин вашего аккаунта github');
         } else {
             const {total_count, items} = await githubApi.findUsers(chat.response.message.text)
-            const user = items.find(item => item.login === chat.response.message.text);
+            const user = items.find(item => item.login.toLowerCase() === chat.response.message.text.toLowerCase());
             if (total_count === 0 || !user) {
                 chat.reply('Пользователей с таким логином не найдено');
                 return;
